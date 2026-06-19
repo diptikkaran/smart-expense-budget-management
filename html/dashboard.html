@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,177 +8,181 @@
 
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
-<div class="dashboard-layout">
+    <div class="dashboard-layout">
 
-    <!-- SIDEBAR -->
+        <!-- SIDEBAR -->
 
-    <div class="sidebar">
+        <div class="sidebar">
 
-        <h2>💰 Smart Expense</h2>
+            <h2>💰 Smart Expense</h2>
 
-        <ul>
+            <ul>
 
-            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+                <li><a href="dashboard.html">🏠 Dashboard</a></li>
 
-            <li><a href="personal.html">💵 Personal</a></li>
+                <li><a href="personal.html">💵 Personal</a></li>
 
-            <li><a href="group.html">👥 Groups</a></li>
+                <li><a href="group.html">👥 Groups</a></li>
 
-            <li><a href="family.html">👨‍👩‍👧 Family</a></li>
+                <li><a href="family.html">👨‍👩‍👧 Family</a></li>
 
-            <li><a href="reports.html">📊 Reports</a></li>
+                <li><a href="reports.html">📊 Reports</a></li>
 
-        </ul>
+            </ul>
+
+        </div>
+
+        <!-- MAIN CONTENT -->
+
+        <div class="main-content">
+
+            <div class="dashboard-header">
+
+                <h1>Welcome, Diptik 👋</h1>
+
+                <p>Manage all your finances from one place</p>
+
+            </div>
+
+            <!-- PROFILE -->
+
+            <div class="profile-card">
+
+                <h3>User Profile</h3>
+
+                <p><strong>Name:</strong> Diptik Karan</p>
+
+                <p><strong>Current Workspace:</strong> Personal Finance</p>
+
+                <p><strong>Last Login:</strong> 19-Jun-2026</p>
+
+            </div>
+
+            <!-- STATS -->
+
+            <div class="stats-container">
+
+                <div class="stat-card">
+                    <h3>Total Balance</h3>
+                    <h2 id="totalBalance">₹0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Income</h3>
+                    <h2 id="totalIncome">₹0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Expense</h3>
+                    <h2 id="totalExpense">₹0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Savings</h3>
+                    <h2 id="totalSavings">₹0</h2>
+                </div>
+
+            </div>
+
+            <!-- WORKSPACE -->
+
+            <div class="section-card">
+
+                <h2>Workspace Management</h2>
+
+                <button>Create Personal Space</button>
+
+                <button>Create Student Group</button>
+
+                <button>Create Family Group</button>
+
+                <button>Join Workspace</button>
+
+            </div>
+
+            <!-- MY WORKSPACES -->
+
+            <div class="section-card">
+
+                <h2>My Workspaces</h2>
+
+                <div class="workspace-card">
+                    Personal Finance
+                </div>
+
+                <div class="workspace-card">
+                    Hostel Room Expenses
+                </div>
+
+                <div class="workspace-card">
+                    Family Budget
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="section-card">
+
+                <h2>Quick Actions</h2>
+
+                <button>Add Income / Expense</button>
+
+                <button>View Reports</button>
+
+            </div>
+
+            <!-- TRANSACTIONS -->
+
+            <div class="section-card">
+
+                <h2>Recent Transactions</h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+
+                            <th>Description</th>
+
+                            <th>Type</th>
+
+                            <th>Amount</th>
+
+                            <th>Available Balance</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td colspan="5">
+                                No Transactions Available
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </div>
-
-    <!-- MAIN CONTENT -->
-
-    <div class="main-content">
-
-        <div class="dashboard-header">
-
-            <h1>Welcome, Diptik 👋</h1>
-
-            <p>Manage all your finances from one place</p>
-
-        </div>
-
-        <!-- PROFILE -->
-
-        <div class="profile-card">
-
-            <h3>User Profile</h3>
-
-            <p><strong>Name:</strong> Diptik Karan</p>
-
-            <p><strong>Current Workspace:</strong> Personal Finance</p>
-
-            <p><strong>Last Login:</strong> 19-Jun-2026</p>
-
-        </div>
-
-        <!-- STATS -->
-
-        <div class="stats-container">
-
-            <div class="stat-card">
-                <h3>Total Balance</h3>
-                <h2>₹0</h2>
-            </div>
-
-            <div class="stat-card">
-                <h3>Total Income</h3>
-                <h2>₹0</h2>
-            </div>
-
-            <div class="stat-card">
-                <h3>Total Expense</h3>
-                <h2>₹0</h2>
-            </div>
-
-            <div class="stat-card">
-                <h3>Total Savings</h3>
-                <h2>₹0</h2>
-            </div>
-
-        </div>
-
-        <!-- WORKSPACE -->
-
-        <div class="section-card">
-
-            <h2>Workspace Management</h2>
-
-            <button>Create Personal Space</button>
-
-            <button>Create Student Group</button>
-
-            <button>Create Family Group</button>
-
-            <button>Join Workspace</button>
-
-        </div>
-
-        <!-- MY WORKSPACES -->
-
-        <div class="section-card">
-
-            <h2>My Workspaces</h2>
-
-            <div class="workspace-card">
-                Personal Finance
-            </div>
-
-            <div class="workspace-card">
-                Hostel Room Expenses
-            </div>
-
-            <div class="workspace-card">
-                Family Budget
-            </div>
-
-        </div>
-
-        <!-- QUICK ACTIONS -->
-
-        <div class="section-card">
-
-            <h2>Quick Actions</h2>
-
-            <button>Add Income / Expense</button>
-
-            <button>View Reports</button>
-
-        </div>
-
-        <!-- TRANSACTIONS -->
-
-        <div class="section-card">
-
-            <h2>Recent Transactions</h2>
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Date</th>
-
-                        <th>Description</th>
-
-                        <th>Type</th>
-
-                        <th>Amount</th>
-
-                        <th>Available Balance</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr>
-
-                        <td colspan="5">
-                            No Transactions Available
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</div>
+    
+    <script src="../js/dashboard.js"></script>
 
 </body>
+
 </html>
