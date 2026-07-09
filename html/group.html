@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Group Expense Management</title>
+
+    <link rel="stylesheet"
+        href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>💰 Smart Expense</h2>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    🏠 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="personal.html">
+                    💵 Personal
+                </a>
+            </li>
+
+            <li>
+                <a href="group.html">
+                    👥 Groups
+                </a>
+            </li>
+
+            <li>
+                <a href="family.html">
+                    👨‍👩‍👧 Family
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    📊 Reports
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <div class="dashboard-header">
+
+            <h1>
+                👥 Group Expense Management
+            </h1>
+
+            <p>
+                Manage your shared expenses easily.
+            </p>
+
+        </div>
+
+        <!-- Create Group -->
+
+        <div class="section-card">
+
+            <h2>Create Group</h2>
+
+            <label>
+                Group Name
+            </label>
+
+            <input
+                type="text"
+                id="groupName"
+                placeholder="Enter Group Name">
+
+            <br><br>
+
+            <label>
+                Group Head
+            </label>
+
+            <input
+                type="text"
+                id="groupHead"
+                placeholder="Enter Group Head Name">
+
+            <br><br>
+
+            <button
+                onclick="createGroup()">
+
+                Create Group
+
+            </button>
+
+        </div>
+
+        <!-- Current User -->
+
+        <div class="section-card">
+
+            <h2>Current User</h2>
+
+            <label>
+                Login As
+            </label>
+
+            <select id="currentUser"
+                onchange="changeUser()">
+
+            </select>
+
+            <br><br>
+
+            <strong>
+
+                Current Role :
+
+                <span id="currentRole">
+
+                    Head
+
+                </span>
+
+            </strong>
+
+        </div>
+
+        <!-- Add Member -->
+
+        <div
+            class="section-card"
+            id="memberSection">
+
+            <h2>
+
+                Add Member
+
+            </h2>
+
+            <input
+                type="text"
+                id="memberName"
+                placeholder="Member Name">
+
+            <br><br>
+
+            <button
+                onclick="addMember()">
+
+                Add Member
+
+            </button>
+
+        </div>
+
+        <!-- Member List -->
+
+        <div class="section-card">
+
+            <h2>
+
+                Members
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+
+                            Member
+
+                        </th>
+
+                        <th>
+
+                            Action
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="memberTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Add Expense -->
+
+        <div
+            class="section-card"
+            id="expenseSection">
+
+            <h2>
+
+                Add Expense
+
+            </h2>
+
+            <label>
+
+                Description
+
+            </label>
+
+            <input
+                type="text"
+                id="expenseDescription">
+
+            <br><br>
+
+            <label>
+
+                Category
+
+            </label>
+
+            <select
+                id="expenseCategory">
+
+                <option>Food</option>
+
+                <option>Travel</option>
+
+                <option>Shopping</option>
+
+                <option>Rent</option>
+
+                <option>Bills</option>
+
+                <option>Medical</option>
+
+                <option>Entertainment</option>
+
+                <option>Other</option>
+
+            </select>
+
+            <br><br>
+
+            <label>
+
+                Amount
+
+            </label>
+
+            <input
+                type="number"
+                id="expenseAmount">
+
+            <br><br>
+
+            <label>
+
+                Paid By
+
+            </label>
+
+            <select
+                id="paidBy">
+
+            </select>
+
+            <br><br>
+
+            <button
+                onclick="addExpense()">
+
+                Add Expense
+
+            </button>
+
+        </div>
+
+        <!-- Expense History -->
+
+        <div class="section-card">
+
+            <h2>
+
+                Expense History
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+
+                        <th>Description</th>
+
+                        <th>Category</th>
+
+                        <th>Paid By</th>
+
+                        <th>Amount</th>
+
+                        <th>Edit</th>
+
+                        <th>Delete</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="expenseTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Settlement -->
+
+        <div class="section-card">
+
+            <h2>
+
+                Settlement Summary
+
+            </h2>
+
+            <div
+                class="stats-container">
+
+                <div
+                    class="stat-card">
+
+                    <h3>
+
+                        Total Expense
+
+                    </h3>
+
+                    <h2
+                        id="groupTotalExpense">
+
+                        ₹0
+
+                    </h2>
+
+                </div>
+
+                <div
+                    class="stat-card">
+
+                    <h3>
+
+                        Per Person
+
+                    </h3>
+
+                    <h2
+                        id="perPersonExpense">
+
+                        ₹0
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <h3>
+
+                Settlement Result
+
+            </h3>
+
+            <div
+                id="settlementResult">
+
+                No Settlement Yet
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../js/group.js"></script>
+
+</body>
+
+</html>
