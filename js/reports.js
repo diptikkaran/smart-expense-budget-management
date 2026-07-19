@@ -160,4 +160,5 @@ window.onload = function () {
             categoryTable.appendChild(row);
 
         }
-    };
+    }
+};
