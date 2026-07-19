@@ -27,8 +27,6 @@
 
                 <li><a href="group.html">👥 Groups</a></li>
 
-                <li><a href="family.html">👨‍👩‍👧 Family</a></li>
-
                 <li><a href="reports.html">📊 Reports</a></li>
 
             </ul>
@@ -41,9 +39,15 @@
 
             <div class="dashboard-header">
 
-                <h1>Welcome, Diptik 👋</h1>
+                <div>
 
-                <p>Manage all your finances from one place</p>
+                    <h1 id="welcomeUser">Welcome 👋</h1>
+
+                    <p>Manage all your finances from one place</p>
+
+                </div>
+
+                <button onclick="logout()">Logout</button>
 
             </div>
 
@@ -53,11 +57,11 @@
 
                 <h3>User Profile</h3>
 
-                <p><strong>Name:</strong> Diptik Karan</p>
+                <p><strong>Name:</strong> <span id="userName">Guest</span></p>
 
-                <p><strong>Current Workspace:</strong> Personal Finance</p>
+                <p><strong>Current Workspace:</strong> <span id="currentWorkspace">-</span></p>
 
-                <p><strong>Last Login:</strong> 19-Jun-2026</p>
+                <p><strong>Last Login:</strong> <span id="lastLogin">-</span></p>
 
             </div>
 
@@ -93,13 +97,11 @@
 
                 <h2>Workspace Management</h2>
 
-                <button>Create Personal Space</button>
+                <button onclick="location.href='personal.html'">Create Personal Space</button>
 
-                <button>Create Student Group</button>
+                <button onclick="location.href='group.html'">Create Student Group</button>
 
-                <button>Create Family Group</button>
-
-                <button>Join Workspace</button>
+                <button onclick="location.href='group.html'">Join Workspace</button>
 
             </div>
 
@@ -109,16 +111,12 @@
 
                 <h2>My Workspaces</h2>
 
-                <div class="workspace-card">
-                    Personal Finance
-                </div>
+                <div id="workspaceContainer">
 
-                <div class="workspace-card">
-                    Hostel Room Expenses
-                </div>
+                    <div class="workspace-card">
+                        No Workspace Available
+                    </div>
 
-                <div class="workspace-card">
-                    Family Budget
                 </div>
 
             </div>
@@ -129,9 +127,9 @@
 
                 <h2>Quick Actions</h2>
 
-                <button>Add Income / Expense</button>
+                <button onclick="location.href='personal.html'">Add Income / Expense</button>
 
-                <button>View Reports</button>
+                <button onclick="location.href='reports.html'">View Reports</button>
 
             </div>
 
@@ -161,9 +159,9 @@
 
                     </thead>
 
-                    <tbody>
+                    <tbody id="recentTransactionTable">
 
-                        <tr>
+                        <tr id="noRecentTransaction">
 
                             <td colspan="5">
                                 No Transactions Available
@@ -180,7 +178,7 @@
         </div>
 
     </div>
-    
+    <script src="../js/auth.js"></script>
     <script src="../js/dashboard.js"></script>
 
 </body>

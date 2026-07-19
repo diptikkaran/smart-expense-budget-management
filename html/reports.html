@@ -21,7 +21,6 @@
                 <li><a href="dashboard.html">🏠 Dashboard</a></li>
                 <li><a href="personal.html">💵 Personal</a></li>
                 <li><a href="group.html">👥 Groups</a></li>
-                <li><a href="family.html">👨‍👩‍👧 Family</a></li>
                 <li><a href="reports.html">📊 Reports</a></li>
             </ul>
 
@@ -42,7 +41,7 @@
             <div class="stats-container">
 
                 <div class="stat-card">
-                    <h3>Current Balance</h3>
+                    <h3>total Balance</h3>
                     <h2 id="reportBalance">₹0</h2>
                 </div>
 
@@ -58,6 +57,15 @@
                 <div class="stat-card">
                     <h3>Total Transactions</h3>
                     <h2 id="reportTransactions">0</h2>
+                </div>
+                <div class="stat-card">
+                    <h3>Group Expense</h3>
+                    <h2 id="reportGroupExpense">₹0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Members</h3>
+                    <h2 id="reportMembers">0</h2>
                 </div>
 
             </div>
@@ -120,6 +128,15 @@
                     </thead>
 
                     <tbody id="recentTransactionsTable">
+                        <tr id="noRecentTransaction">
+
+                            <td colspan="5">
+
+                                No Transactions Available
+
+                            </td>
+
+                        </tr>
 
                     </tbody>
 
@@ -145,6 +162,15 @@
                     </thead>
 
                     <tbody id="categoryExpenseTable">
+                        <tr id="noCategoryExpense">
+
+                            <td colspan="2">
+
+                                No Expense Data Available
+
+                            </td>
+
+                        </tr>
 
                     </tbody>
 

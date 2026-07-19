@@ -14,6 +14,20 @@ function saveGroup() {
         "groupData",
         JSON.stringify(group)
     );
+    localStorage.setItem(
+        "groupCount",
+        1
+    );
+
+    localStorage.setItem(
+        "memberCount",
+        group.members.length
+    );
+
+    localStorage.setItem(
+        "groupExpenseCount",
+        group.expenses.length
+    );
 
 }
 
@@ -147,6 +161,11 @@ function createGroup() {
     renderExpenses();
 
     calculateSettlement();
+    document.getElementById(
+        "memberName"
+    ).value = "";
+
+    clearExpenseForm();
 
     alert(
         "Group Created Successfully"
@@ -535,6 +554,13 @@ function addExpense() {
         return;
 
     }
+    if (description.length > 100) {
+
+        alert("Description should not exceed 100 characters");
+
+        return;
+
+    }
 
     if (amount <= 0) {
 
@@ -550,7 +576,7 @@ function addExpense() {
         createdAt: Date.now(),
 
         date:
-            new Date().toLocaleDateString(),
+            new Date().toLocaleString(),
 
         description,
 
@@ -833,6 +859,10 @@ function calculateSettlement() {
         totalExpense += expense.amount;
 
     });
+    localStorage.setItem(
+        "groupTotalExpense",
+        totalExpense
+    );
 
     document.getElementById(
         "groupTotalExpense"

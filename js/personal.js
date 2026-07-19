@@ -6,23 +6,23 @@ let transactions = [];
 let editIndex = -1;
 
 const incomeCategories = [
-"Salary",
-"Scholarship",
-"Freelancing",
-"Investment",
-"Gift",
-"Other"
+    "Salary",
+    "Scholarship",
+    "Freelancing",
+    "Investment",
+    "Gift",
+    "Other"
 ];
 
 const expenseCategories = [
-"Food",
-"Travel",
-"Shopping",
-"Rent",
-"Medical",
-"Bills",
-"Entertainment",
-"Other"
+    "Food",
+    "Travel",
+    "Shopping",
+    "Rent",
+    "Medical",
+    "Bills",
+    "Entertainment",
+    "Other"
 ];
 
 const typeSelect = document.getElementById("type");
@@ -31,56 +31,59 @@ const categorySelect = document.getElementById("category");
 function loadCategories() {
 
 
-categorySelect.innerHTML = "";
+    categorySelect.innerHTML = "";
 
-const categories =
-    typeSelect.value === "Income"
-    ? incomeCategories
-    : expenseCategories;
+    const categories =
+        typeSelect.value === "Income"
+            ? incomeCategories
+            : expenseCategories;
 
-categories.forEach(category => {
+    categories.forEach(category => {
 
-    const option =
-        document.createElement("option");
+        const option =
+            document.createElement("option");
 
-    option.value = category;
-    option.textContent = category;
+        option.value = category;
+        option.textContent = category;
 
-    categorySelect.appendChild(option);
+        categorySelect.appendChild(option);
 
-});
+    });
 
 
 }
 
 typeSelect.addEventListener(
-"change",
-loadCategories
+    "change",
+    loadCategories
 );
 
 function setOpeningBalance() {
 
 
-const opening =
-    Number(
-        document.getElementById(
-            "openingBalance"
-        ).value
+    const opening =
+        Number(
+            document.getElementById(
+                "openingBalance"
+            ).value
+        );
+    if (isNaN(opening)) {
+        alert("Enter Opening Balance");
+        return;
+    }
+    if (opening < 0) {
+        alert("Invalid Opening Balance");
+        return;
+    }
+
+    localStorage.setItem(
+        "openingBalance",
+        opening
     );
 
-if (opening < 0) {
-    alert("Invalid Opening Balance");
-    return;
-}
+    recalculate();
 
-localStorage.setItem(
-    "openingBalance",
-    opening
-);
-
-recalculate();
-
-updatePreview();
+    updatePreview();
 
 
 }
@@ -88,102 +91,103 @@ updatePreview();
 function addTransaction() {
 
 
-const type =
-    document.getElementById(
-        "type"
-    ).value;
-
-const category =
-    document.getElementById(
-        "category"
-    ).value;
-
-const amount =
-    Number(
+    const type =
         document.getElementById(
-            "amount"
-        ).value
-    );
+            "type"
+        ).value;
 
-const description =
+    const category =
+        document.getElementById(
+            "category"
+        ).value;
+
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        );
+
+    const description =
+        document.getElementById(
+            "description"
+        ).value;
+
+    const paymentMethod =
+        document.getElementById(
+            "paymentMethod"
+        ).value;
+
+    if (amount <= 0) {
+
+        alert(
+            "Enter Valid Amount"
+        );
+
+        return;
+    }
+    if (description.trim() === "") {
+        alert("Enter Description");
+        return;
+    }
+
+    if (description.length > 100) {
+        alert("Description should not exceed 100 characters");
+        return;
+    }
+
+    const transaction = {
+
+        id: Date.now(),
+
+        date:
+            new Date()
+                .toLocaleString(),
+
+        category,
+
+        description,
+
+        type,
+
+        amount,
+
+        paymentMethod
+
+    };
+
+    if (editIndex === -1) {
+
+        transactions.push(
+            transaction
+        );
+
+    } else {
+
+        transactions[
+            editIndex
+        ] = transaction;
+
+        editIndex = -1;
+
+        document.getElementById(
+            "addBtn"
+        ).textContent =
+            "Add Transaction";
+
+    }
+
+    document.getElementById(
+        "amount"
+    ).value = "";
+
     document.getElementById(
         "description"
-    ).value;
+    ).value = "";
 
-const paymentMethod =
-    document.getElementById(
-        "paymentMethod"
-    ).value;
+    recalculate();
 
-if (amount <= 0) {
-
-    alert(
-        "Enter Valid Amount"
-    );
-
-    return;
-}
-if (description.trim() === "") {
-
-    alert(
-        "Please enter description"
-    );
-
-    return;
-}
-
-const transaction = {
-
-    id: Date.now(),
-
-    date:
-        new Date()
-        .toLocaleDateString(),
-
-    category,
-
-    description,
-
-    type,
-
-    amount,
-
-    paymentMethod
-
-};
-
-if (editIndex === -1) {
-
-    transactions.push(
-        transaction
-    );
-
-} else {
-
-    transactions[
-        editIndex
-    ] = transaction;
-
-    editIndex = -1;
-
-    document.getElementById(
-        "addBtn"
-    ).textContent =
-        "Add Transaction";
-
-}
-
-document.getElementById(
-    "amount"
-).value = "";
-
-document.getElementById(
-    "description"
-).value = "";
-
-recalculate();
-
-updatePreview();
+    updatePreview();
 
 
 }
@@ -191,53 +195,53 @@ updatePreview();
 function recalculate() {
 
 
-income = 0;
-expense = 0;
+    income = 0;
+    expense = 0;
 
-let currentBalance =
-    Number(
-        localStorage.getItem(
-            "openingBalance"
-        ) || 0
-    );
+    let currentBalance =
+        Number(
+            localStorage.getItem(
+                "openingBalance"
+            ) || 0
+        );
 
-transactions.forEach(
-    transaction => {
+    transactions.forEach(
+        transaction => {
 
-        if (
-            transaction.type
-            === "Income"
-        ) {
+            if (
+                transaction.type
+                === "Income"
+            ) {
 
-            income +=
-                transaction.amount;
+                income +=
+                    transaction.amount;
 
-            currentBalance +=
-                transaction.amount;
+                currentBalance +=
+                    transaction.amount;
 
-        } else {
+            } else {
 
-            expense +=
-                transaction.amount;
+                expense +=
+                    transaction.amount;
 
-            currentBalance -=
-                transaction.amount;
+                currentBalance -=
+                    transaction.amount;
+
+            }
+
+            transaction.balanceAfter =
+                currentBalance;
 
         }
+    );
 
-        transaction.balanceAfter =
-            currentBalance;
+    balance = currentBalance;
 
-    }
-);
+    updateCards();
 
-balance = currentBalance;
+    renderTransactions();
 
-updateCards();
-
-renderTransactions();
-
-saveData();
+    saveData();
 
 
 }
@@ -284,14 +288,14 @@ function renderTransactions() {
             <td>${transaction.description}</td>
 
             <td>
-                ${
-                    transaction.type === "Income"
+                ${transaction.type === "Income"
                     ? '<span style="color:green;font-weight:bold;">Income</span>'
                     : '<span style="color:red;font-weight:bold;">Expense</span>'
                 }
             </td>
 
             <td>₹${transaction.amount}</td>
+            <td>${transaction.paymentMethod}</td>
 
             <td>₹${transaction.balanceAfter}</td>
 
@@ -318,42 +322,42 @@ function renderTransactions() {
 function editTransaction(index) {
 
 
-const transaction =
-    transactions[index];
+    const transaction =
+        transactions[index];
 
-document.getElementById(
-    "type"
-).value =
-    transaction.type;
+    document.getElementById(
+        "type"
+    ).value =
+        transaction.type;
 
-loadCategories();
+    loadCategories();
 
-document.getElementById(
-    "category"
-).value =
-    transaction.category;
+    document.getElementById(
+        "category"
+    ).value =
+        transaction.category;
 
-document.getElementById(
-    "amount"
-).value =
-    transaction.amount;
+    document.getElementById(
+        "amount"
+    ).value =
+        transaction.amount;
 
-document.getElementById(
-    "description"
-).value =
-    transaction.description;
+    document.getElementById(
+        "description"
+    ).value =
+        transaction.description;
 
-document.getElementById(
-    "paymentMethod"
-).value =
-    transaction.paymentMethod;
+    document.getElementById(
+        "paymentMethod"
+    ).value =
+        transaction.paymentMethod;
 
-editIndex = index;
+    editIndex = index;
 
-document.getElementById(
-    "addBtn"
-).textContent =
-    "Update Transaction";
+    document.getElementById(
+        "addBtn"
+    ).textContent =
+        "Update Transaction";
 
 
 }
@@ -361,20 +365,20 @@ document.getElementById(
 function deleteTransaction(index) {
 
 
-if (
-    confirm(
-        "Delete this transaction?"
-    )
-) {
+    if (
+        confirm(
+            "Delete this transaction?"
+        )
+    ) {
 
-    transactions.splice(
-        index,
-        1
-    );
+        transactions.splice(
+            index,
+            1
+        );
 
-    recalculate();
+        recalculate();
 
-}
+    }
 
 
 }
@@ -382,22 +386,22 @@ if (
 function updateCards() {
 
 
-document.getElementById(
-    "balance"
-).textContent =
-    "₹" + balance;
+    document.getElementById(
+        "balance"
+    ).textContent =
+        "₹" + balance;
 
-document.getElementById(
-    "income"
-).textContent =
-    "₹" + income;
+    document.getElementById(
+        "income"
+    ).textContent =
+        "₹" + income;
 
-document.getElementById(
-    "expense"
-).textContent =
-    "₹" + expense;
+    document.getElementById(
+        "expense"
+    ).textContent =
+        "₹" + expense;
 
-updatePreview();
+    updatePreview();
 
 
 }
@@ -405,42 +409,42 @@ updatePreview();
 function updatePreview() {
 
 
-const amount =
-    Number(
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        ) || 0;
+
+    const type =
         document.getElementById(
-            "amount"
-        ).value
-    ) || 0;
+            "type"
+        ).value;
 
-const type =
+    let afterBalance =
+        balance;
+
+    if (type === "Income") {
+
+        afterBalance =
+            balance + amount;
+
+    } else {
+
+        afterBalance =
+            balance - amount;
+
+    }
+
     document.getElementById(
-        "type"
-    ).value;
+        "currentBalancePreview"
+    ).textContent =
+        "₹" + balance;
 
-let afterBalance =
-    balance;
-
-if (type === "Income") {
-
-    afterBalance =
-        balance + amount;
-
-} else {
-
-    afterBalance =
-        balance - amount;
-
-}
-
-document.getElementById(
-    "currentBalancePreview"
-).textContent =
-    "₹" + balance;
-
-document.getElementById(
-    "afterBalancePreview"
-).textContent =
-    "₹" + afterBalance;
+    document.getElementById(
+        "afterBalancePreview"
+    ).textContent =
+        "₹" + afterBalance;
 
 
 }
@@ -448,27 +452,35 @@ document.getElementById(
 function saveData() {
 
 
-localStorage.setItem(
-    "transactions",
-    JSON.stringify(
-        transactions
-    )
-);
+    localStorage.setItem(
+        "personalTransactions",
+        JSON.stringify(
+            transactions
+        )
+    );
 
-localStorage.setItem(
-    "totalIncome",
-    income
-);
+    localStorage.setItem(
+        "totalIncome",
+        income
+    );
 
-localStorage.setItem(
-    "totalExpense",
-    expense
-);
+    localStorage.setItem(
+        "totalExpense",
+        expense
+    );
 
-localStorage.setItem(
-    "currentBalance",
-    balance
-);
+    localStorage.setItem(
+        "currentBalance",
+        balance
+    );
+    localStorage.setItem(
+        "totalSavings",
+        balance
+    );
+    localStorage.setItem(
+        "transactionCount",
+        transactions.length
+    );
 
 
 }
@@ -476,35 +488,35 @@ localStorage.setItem(
 function loadData() {
 
 
-transactions =
-    JSON.parse(
-        localStorage.getItem(
-            "transactions"
-        )
-    ) || [];
+    transactions =
+        JSON.parse(
+            localStorage.getItem(
+                "personalTransactions"
+            )
+        ) || [];
 
-recalculate();
+    recalculate();
 
 
 }
 
 document
-.getElementById(
-"amount"
-)
-.addEventListener(
-"input",
-updatePreview
-);
+    .getElementById(
+        "amount"
+    )
+    .addEventListener(
+        "input",
+        updatePreview
+    );
 
 document
-.getElementById(
-"type"
-)
-.addEventListener(
-"change",
-updatePreview
-);
+    .getElementById(
+        "type"
+    )
+    .addEventListener(
+        "change",
+        updatePreview
+    );
 
 loadCategories();
 loadData();

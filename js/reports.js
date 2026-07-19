@@ -21,12 +21,23 @@ window.onload = function () {
 
     document.getElementById("summaryExpense").innerText =
         "₹" + (expense || 0);
+    const groupExpense =
+        localStorage.getItem("groupTotalExpense") || 0;
+
+    document.getElementById("reportGroupExpense").innerText =
+        "₹" + groupExpense;
+
+    const memberCount =
+        localStorage.getItem("memberCount") || 0;
+
+    document.getElementById("reportMembers").innerText =
+        memberCount;
 
 
     const transactions =
         JSON.parse(
             localStorage.getItem(
-                "transactions"
+                "personalTransactions"
             )
         ) || [];
 
@@ -34,13 +45,17 @@ window.onload = function () {
         "reportTransactions"
     ).innerText =
         transactions.length;
-    
-    const netSavings = income - expense;
+
+
+    const totalIncome = Number(income) || 0;
+    const totalExpense = Number(expense) || 0;
+
+    const netSavings = totalIncome - totalExpense;
 
     const savingsRate =
-        income > 0
+        totalIncome  > 0
             ? (
-                (netSavings / income) * 100
+                (netSavings / totalIncome ) * 100
             ).toFixed(2)
             : 0;
 
@@ -50,41 +65,40 @@ window.onload = function () {
         savingsRate + "%";
 
 
-const table =
-    document.getElementById(
-        "recentTransactionsTable"
-    );
+    const table =
+        document.getElementById(
+            "recentTransactionsTable"
+        );
 
-table.innerHTML = "";
+    table.innerHTML = "";
 
-if (transactions.length === 0) {
+    if (transactions.length === 0) {
 
-    table.innerHTML = `
+        table.innerHTML = `
         <tr>
             <td colspan="5">
-                No Transactions Found
+                No Transactions Available
             </td>
         </tr>
     `;
 
-} else {
+    } else {
 
-    transactions
-        .slice(0, 5)
-        .forEach(transaction => {
+        transactions
+            .slice(0, 5)
+            .forEach(transaction => {
 
-            const row =
-                document.createElement(
-                    "tr"
-                );
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
 
-            row.innerHTML = `
+                row.innerHTML = `
                 <td>${transaction.date}</td>
                 <td>${transaction.category}</td>
                 <td>${transaction.description}</td>
                 <td>
-                    ${
-                        transaction.type === "Income"
+                    ${transaction.type === "Income"
                         ? '<span style="color:green;font-weight:bold;">Income</span>'
                         : '<span style="color:red;font-weight:bold;">Expense</span>'
                     }
@@ -92,48 +106,58 @@ if (transactions.length === 0) {
                 <td>₹${transaction.amount}</td>
             `;
 
-            table.appendChild(row);
+                table.appendChild(row);
 
-        });
+            });
 
-}
-console.log(transactions);
-const categoryTotals = {};
+    }
+    const categoryTotals = {};
 
-transactions.forEach(transaction => {
+    transactions.forEach(transaction => {
 
-    if (transaction.type.toLowerCase() === "expense") {
+        if (transaction.type.toLowerCase() === "expense") {
 
-        if (!categoryTotals[transaction.category]) {
+            if (!categoryTotals[transaction.category]) {
 
-            categoryTotals[transaction.category] = 0;
+                categoryTotals[transaction.category] = 0;
+
+            }
+
+            categoryTotals[transaction.category] += Number(transaction.amount);
 
         }
 
-        categoryTotals[transaction.category] += transaction.amount;
+    });
 
-    }
+    const categoryTable =
+        document.getElementById(
+            "categoryExpenseTable"
+        );
 
-});
+    categoryTable.innerHTML = "";
+    if (Object.keys(categoryTotals).length === 0) {
 
-const categoryTable =
-    document.getElementById(
-        "categoryExpenseTable"
-    );
+        categoryTable.innerHTML = `
+        <tr>
+            <td colspan="2">
+                No Expense Data Available
+            </td>
+        </tr>
+    `;
 
-categoryTable.innerHTML = "";
+    } else {
 
-for (const category in categoryTotals) {
+        for (const category in categoryTotals) {
 
-    const row =
-        document.createElement("tr");
+            const row =
+                document.createElement("tr");
 
-    row.innerHTML = `
+            row.innerHTML = `
         <td>${category}</td>
         <td>₹${categoryTotals[category]}</td>
     `;
 
-    categoryTable.appendChild(row);
+            categoryTable.appendChild(row);
 
-}
-};
+        }
+    };

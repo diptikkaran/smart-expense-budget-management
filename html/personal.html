@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,203 +8,197 @@
 
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
-<div class="dashboard-layout">
+    <div class="dashboard-layout">
 
-    <div class="sidebar">
+        <div class="sidebar">
 
-        <h2>💰 Smart Expense</h2>
+            <h2>💰 Smart Expense</h2>
 
-        <ul>
-            <li><a href="dashboard.html">🏠 Dashboard</a></li>
-            <li><a href="personal.html">💵 Personal</a></li>
-            <li><a href="group.html">👥 Groups</a></li>
-            <li><a href="family.html">👨‍👩‍👧 Family</a></li>
-            <li><a href="reports.html">📊 Reports</a></li>
-        </ul>
-
-    </div>
-
-    <div class="main-content">
-
-        <div class="dashboard-header">
-
-            <h1>Personal Finance</h1>
-
-            <p>
-                Track your income, expenses and savings
-            </p>
+            <ul>
+                <li><a href="dashboard.html">🏠 Dashboard</a></li>
+                <li><a href="personal.html">💵 Personal</a></li>
+                <li><a href="group.html">👥 Groups</a></li>
+                <li><a href="reports.html">📊 Reports</a></li>
+            </ul>
 
         </div>
 
-        <div class="stats-container">
+        <div class="main-content">
 
-            <div class="stat-card">
-                <h3>Current Balance</h3>
-                <h2 id="balance">₹0</h2>
-            </div>
+            <div class="dashboard-header">
 
-            <div class="stat-card">
-                <h3>Total Income</h3>
-                <h2 id="income">₹0</h2>
-            </div>
-
-            <div class="stat-card">
-                <h3>Total Expense</h3>
-                <h2 id="expense">₹0</h2>
-            </div>
-
-        </div>
-
-        <div class="section-card">
-
-            <h2>Opening Balance</h2>
-
-            <input
-                type="number"
-                id="openingBalance"
-                placeholder="Enter Opening Balance">
-
-            <button onclick="setOpeningBalance()">
-                Save Balance
-            </button>
-
-        </div>
-
-        <div class="section-card">
-
-            <h2>Add Transaction</h2>
-
-            <label>Type</label>
-
-            <select id="type">
-
-                <option value="Income">
-                    Income
-                </option>
-
-                <option value="Expense">
-                    Expense
-                </option>
-
-            </select>
-
-            <br><br>
-
-            <label>Category</label>
-
-            <select id="category"></select>
-
-            <br><br>
-
-            <label>Amount</label>
-
-            <input
-                type="number"
-                id="amount"
-                placeholder="Enter Amount">
-
-            <br><br>
-
-            <div class="balance-preview">
+                <h1>Personal Finance</h1>
 
                 <p>
-                    Current Balance:
-                    <span id="currentBalancePreview">
-                        ₹0
-                    </span>
-                </p>
-
-                <p>
-                    Balance After Transaction:
-                    <span id="afterBalancePreview">
-                        ₹0
-                    </span>
+                    Track your income, expenses and savings
                 </p>
 
             </div>
 
-            <br><br>
+            <div class="stats-container">
 
-            <label>Description</label>
+                <div class="stat-card">
+                    <h3>Current Balance</h3>
+                    <h2 id="balance">₹0</h2>
+                </div>
 
-            <input
-                type="text"
-                id="description"
-                placeholder="Enter Description">
+                <div class="stat-card">
+                    <h3>Total Income</h3>
+                    <h2 id="income">₹0</h2>
+                </div>
 
-            <br><br>
+                <div class="stat-card">
+                    <h3>Total Expense</h3>
+                    <h2 id="expense">₹0</h2>
+                </div>
 
-            <label>Payment Method</label>
+            </div>
 
-            <select id="paymentMethod">
+            <div class="section-card">
 
-                <option>Cash</option>
+                <h2>Opening Balance</h2>
 
-                <option>UPI</option>
+                <input type="number" id="openingBalance" placeholder="Enter Opening Balance">
 
-                <option>Debit Card</option>
+                <button onclick="setOpeningBalance()">
+                    Save Balance
+                </button>
 
-                <option>Credit Card</option>
+            </div>
 
-                <option>Bank Transfer</option>
+            <div class="section-card">
 
-            </select>
+                <h2>Add Transaction</h2>
 
-            <br><br>
+                <label>Type</label>
 
-            <button
-                id="addBtn"
-                onclick="addTransaction()">
+                <select id="type">
 
-                Add Transaction
+                    <option value="Income">
+                        Income
+                    </option>
 
-            </button>
+                    <option value="Expense">
+                        Expense
+                    </option>
 
-        </div>
+                </select>
 
-        <div class="section-card">
+                <br><br>
 
-            <h2>Transaction History</h2>
+                <label>Category</label>
 
-            <table>
+                <select id="category"></select>
 
-                <thead>
+                <br><br>
 
-                    <tr>
+                <label>Amount</label>
 
-                        <th>Date</th>
+                <input type="number" id="amount" placeholder="Enter Amount">
 
-                        <th>Category</th>
+                <br><br>
 
-                        <th>Description</th>
+                <div class="balance-preview">
 
-                        <th>Type</th>
+                    <p>
+                        Current Balance:
+                        <span id="currentBalancePreview">
+                            ₹0
+                        </span>
+                    </p>
 
-                        <th>Amount</th>
+                    <p>
+                        Balance After Transaction:
+                        <span id="afterBalancePreview">
+                            ₹0
+                        </span>
+                    </p>
 
-                        <th>Balance After Txn</th>
+                </div>
 
-                        <th>Actions</th>
+                <br><br>
 
-                    </tr>
+                <label>Description</label>
 
-                </thead>
+                <input type="text" id="description" placeholder="Enter Description">
 
-                <tbody id="transactionTable">
+                <br><br>
 
-                </tbody>
+                <label>Payment Method</label>
 
-            </table>
+                <select id="paymentMethod">
+
+                    <option>Cash</option>
+
+                    <option>UPI</option>
+
+                    <option>Debit Card</option>
+
+                    <option>Credit Card</option>
+
+                    <option>Bank Transfer</option>
+
+                </select>
+
+                <br><br>
+
+                <button id="addBtn" onclick="addTransaction()">
+
+                    Add Transaction
+
+                </button>
+
+            </div>
+
+            <div class="section-card">
+
+                <h2>Transaction History</h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+
+                            <th>Category</th>
+
+                            <th>Description</th>
+
+                            <th>Type</th>
+
+                            <th>Amount</th>
+                            <th>Payment</th>
+
+                            <th>Balance After Txn</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="transactionTable">
+                        <tr id="noTransactionRow">
+                            <td colspan="8">No Transactions Available</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
-
-<script src="../js/personal.js"></script>
+    <script src="../js/personal.js"></script>
 
 </body>
+
 </html>
