@@ -1,0 +1,19 @@
+# Frontend
+frontend/smart-expense-frontend/node_modules/
+frontend/smart-expense-frontend/dist/
+
+# Backend
+backend/smart-expense-backend/target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Environment files
+.env
+.env.local
+*.env
+
+# Backend local configuration
+backend/smart-expense-backend/src/main/resources/application.properties
